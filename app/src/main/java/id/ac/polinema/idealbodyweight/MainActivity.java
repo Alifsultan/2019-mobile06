@@ -8,11 +8,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import id.ac.polinema.idealbodyweight.Fragment.AboutFragment;
+import id.ac.polinema.idealbodyweight.Fragment.MenuFragment;
+import id.ac.polinema.idealbodyweight.util.BrocaIndexFragment;
 
-public class MainActivity extends AppCompatActivity {
+public abstract class MainActivity extends AppCompatActivity implements
+		MenuFragment.OnFragmentInteractionListener,
+		BrocaIndexFragment.OnFragmentInteractionListener {
+
 
 	// Deklarasikan atribut Fragment di sini
 	private AboutFragment aboutFragment;
+	private BrocaIndexFragment brocaIndexFragment;
+
+	public MainActivity(BrocaIndexFragment brocaIndexFragment) {
+		this.brocaIndexFragment = brocaIndexFragment;
+	}
 
 
 	@Override
@@ -39,5 +49,16 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+	@Override
+	public void onBrocaIndexButtonClicked() {
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.fragment_container, brocaIndexFragment)
+				.commit();
+	}
+
+	@Override
+	public void onBodyMassIndexButtonClicked() {
+
 	}
 }
